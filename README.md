@@ -1,4 +1,4 @@
-# Greenland mycorrhiza
+![image](https://github.com/alberdilab/greenland_mycorrhiza/assets/37664231/4ea4411a-e038-47ed-92c8-e8a70c456a26)# Greenland mycorrhiza
 Bioinformatic respository of the shotgun metagenomic data analyses of the greenlandic mycorrhizal network project
 
 This pipeline must be run in a high computation cluster.
@@ -36,8 +36,22 @@ screen -S greenland_shotgun
 
 ### Data files
 - Move the raw data files to the 'resources/reads/' directory or create soft links.
+
+```sh
+# In this example, download reads from ERDA
+cd resources/reads/
+wget https://sid.erda.dk/share_redirect/dcKtF82NjL/SH_IndPCR_1A_EKDL210009000-1a-AK4939-AK6653_HTF5CDSX2_L1_1.fq.gz
+wget https://sid.erda.dk/share_redirect/dcKtF82NjL/SH_IndPCR_1A_EKDL210009000-1a-AK4939-AK6653_HTF5CDSX2_L1_2.fq.gz
+cd ../../
+```
+  
 - Download the reference genome of the host to the 'resources/reference/' directory.
 
+```sh
+cd resources/reference/
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/028/015/225/GCA_028015225.1_CAF_CaMyos_1.0/#:~:text=GCA_028015225.1_CAF_CaMyos_1.0_genomic.fna.gz
+cd ../../
+```
 ### Sample input file
 Edit the 'config/samples.tsv' document and add samples names, library identifiers, file locations, adapter sequences and (co)assembly information.
 
@@ -51,8 +65,7 @@ Edit the 'config/samples.tsv' document and add samples names, library identifier
 
 ```tsv
 sample_id	library_id	forward_filename	reverse_filename	forward_adapter	reverse_adapter	assembly_ids
-sample1	lib1	resources/reads/sample1_1.fq.gz	resources/reads/sample1_2.fq.gz	AGATCGGAAGAGCACACGTCTGAACTCCAGTCA	AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT	sample, all
-sample2	lib1	resources/reads/sample2_1.fq.gz	resources/reads/sample2_2.fq.gz	AGATCGGAAGAGCACACGTCTGAACTCCAGTCA	AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT	all
+M10	lib1	resources/reads/sSH_IndPCR_1A_EKDL210009000-1a-AK4939-AK6653_HTF5CDSX2_L1_1.fq.gz	resources/reads/SH_IndPCR_1A_EKDL210009000-1a-AK4939-AK6653_HTF5CDSX2_L1_2.fq.gz	AGATCGGAAGAGCACACGTCTGAACTCCAGTCA	AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT	M10
 ```
 
 ### Add host reference genome to the config file
