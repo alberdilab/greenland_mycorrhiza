@@ -28,7 +28,8 @@ cd mg_assembly
 # Create screen session 
 screen -S greenland_shotgun
 
-# Create conda environments and run test data to validate them (this will probably take 10-20 minutes)
+# Create conda environments and run test data to validate them
+# It might take 20-30 minutes to download and install all software
 ./run
 ```
 
@@ -84,4 +85,20 @@ dram_database: "resources/mock_dram_db"
 gtdbtk_database: "resources/mock_gtdbtk_db"
 singlem_database: "resources/mock_singlem_db"
 kraken2_database: "resources/kraken2_mock"
+```
+
+## Run pipeline
+Once all the input files and data are properly set, it is time to launch the pipeline.
+```sh
+# Ensure the pipeline is launched from the working directory
+cd greenland_shotgun/mg_assembly
+
+# Resume the screen session if you closed it
+screen -r greenland_shotgun
+
+# Load mamba and snakemake dependencies if needed
+module load mamba/1.5.6 snakemake/7.20.0
+
+# Run the pipeline
+./run
 ```
