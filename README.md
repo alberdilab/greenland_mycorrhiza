@@ -49,7 +49,7 @@ cd ../../
 
 ```sh
 cd resources/reference/
-wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/028/015/225/GCA_028015225.1_CAF_CaMyos_1.0/#:~:text=GCA_028015225.1_CAF_CaMyos_1.0_genomic.fna.gz
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/028/015/225/GCA_028015225.1_CAF_CaMyos_1.0/GCA_028015225.1_CAF_CaMyos_1.0_genomic.fna.gz
 cd ../../
 ```
 ### Sample input file
