@@ -72,6 +72,37 @@ sample_id	library_id	forward_filename	reverse_filename	forward_adapter	reverse_a
 M10	lib1	resources/reads/sSH_IndPCR_1A_EKDL210009000-1a-AK4939-AK6653_HTF5CDSX2_L1_1.fq.gz	resources/reads/SH_IndPCR_1A_EKDL210009000-1a-AK4939-AK6653_HTF5CDSX2_L1_2.fq.gz	AGATCGGAAGAGCACACGTCTGAACTCCAGTCA	AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT	M10
 ```
 
+### Database paths
+Databases are stored in the directory 'resources/databases'. The default databases are minor representations that allow testing the pipeline. These need to be replaced by proper databases.
+
+```sh
+# Singlem: download the database from Zenodo.
+cd /projects/mjolnir1/people/jpl786/greenland_shotgun/mg_assembly/resources/databases/singlem
+rm -r S3.2.1.GTDB_r214.metapackage_20231006.smpkg.zb
+wget https://zenodo.org/records/8419620/files/S3.2.1.GTDB_r214.metapackage_20231006.smpkg.zb.tar.gz?download=1 && mv 'S3.2.1.GTDB_r214.metapackage_20231006.smpkg.zb.tar.gz?download=1' S3.2.1.GTDB_r214.metapackage_20231006.smpkg.zb.tar.gz && tar -xvzf S3.2.1.GTDB_r214.metapackage_20231006.smpkg.zb.tar.gz && rm S3.2.1.GTDB_r214.metapackage_20231006.smpkg.zb.tar.gz
+
+# Checkm2: create a soft link to an existing database
+cd /projects/mjolnir1/people/jpl786/greenland_shotgun/mg_assembly/resources/databases/checkm2
+rm uniref100.KO.1.dmnd
+ln -s /maps/datasets/mjolnir_databases/checkm2/20210323 20210323 
+
+# DRAM: create a soft link to an existing database
+cd /projects/mjolnir1/people/jpl786/greenland_shotgun/mg_assembly/resources/databases/dram
+rm -rf 20230811
+ln -s /maps/datasets/mjolnir_databases/dram/20230811 20230811
+
+# GTDB: create a soft link to an existing database
+cd /projects/mjolnir1/people/jpl786/greenland_shotgun/mg_assembly/resources/databases/gtdbtk
+rm -rf release214
+ln -s /maps/projects/mjolnir1/data/databases/GTDBTK_DB/release214 release214
+
+# Kraken2: create a soft link to an existing database
+cd /projects/mjolnir1/people/jpl786/greenland_shotgun/mg_assembly/resources/databases/kraken2
+rm -r kraken2_RefSeqV205_Complete_500GB
+ln -s /maps/projects/mjolnir1/data/databases/kraken2/kraken2_RefSeqV205_Complete_500GB kraken2_RefSeqV205_Complete_500GB
+cd ../../../
+```
+
 ### Add host reference genome to the config file
 Edit 'config/features.yml' with reference databases:
 
