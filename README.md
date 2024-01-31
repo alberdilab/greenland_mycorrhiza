@@ -1,7 +1,9 @@
-![image](https://github.com/alberdilab/greenland_mycorrhiza/assets/37664231/4ea4411a-e038-47ed-92c8-e8a70c456a26)# Greenland mycorrhiza
+# Greenland mycorrhiza
 Bioinformatic respository of the shotgun metagenomic data analyses of the greenlandic mycorrhizal network project
 
-This pipeline must be run in a high computation cluster.
+The following genome-resolved metagenomic pipeline is run: https://github.com/3d-omics/mg_assembly
+
+This pipeline must be run in a high computation cluster. 
 
 ## Root software dependencies
 The pipeline only relies on two software:
