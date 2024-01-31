@@ -99,6 +99,6 @@ screen -r greenland_shotgun
 # Load mamba and snakemake dependencies if needed
 module load mamba/1.5.6 snakemake/7.20.0
 
-# Run the pipeline
-./run
+# Run the pipeline using slurm
+./run_slurm
 ```
