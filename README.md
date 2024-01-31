@@ -48,6 +48,7 @@ cd ../../
 - Download the reference genome of the host to the 'resources/reference/' directory.
 
 ```sh
+# In this example, download the genome of Carex myosuroides from Genbank
 cd resources/reference/
 wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/028/015/225/GCA_028015225.1_CAF_CaMyos_1.0/GCA_028015225.1_CAF_CaMyos_1.0_genomic.fna.gz
 cd ../../
@@ -73,7 +74,7 @@ Edit 'config/features.yml' with reference databases:
 
 ```yaml
 host:
-  fasta: resources/reference/chicken_39_sub.fa.gz
+  fasta: resources/reference/GCA_028015225.1_CAF_CaMyos_1.0_genomic.fna.gz #this is the line that has been changed
 
 magscot:
   pfam_hmm: workflow/scripts/MAGScoT/hmm/gtdbtk_rel207_Pfam-A.hmm.gz
