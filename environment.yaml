@@ -1,0 +1,12 @@
+ name: unite_mapping
+ channels:
+    - conda-forge
+    - bioconda
+    - defaults
+ dependencies:
+    - fastp=0.23.1
+    - samtools=1.12
+    - bowtie2=2.4.4
+    - coverm=0.6.1
+    - star=2.7.1
+    - pigz=2.3.4
