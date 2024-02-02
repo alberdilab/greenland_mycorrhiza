@@ -63,7 +63,7 @@ rule index_unite:
         "resources/database/sh_general_release_dynamic_25.07.2023.fasta"
     output:
         multiext(
-            "resources/database/unite",
+            "resources/database/sh_general_release_dynamic_25.07.2023",
             ".1.bt2",
             ".2.bt2",
             ".3.bt2",
@@ -103,7 +103,7 @@ rule bowtie2_unite_mapping:
         r1 = "results/fastp/{sample}_1.fq.gz",
         r2 = "results/fastp/{sample}_2.fq.gz",
         index=multiext(
-            "resources/database/unite",
+            "resources/database/sh_general_release_dynamic_25.07.2023",
             ".1.bt2",
             ".2.bt2",
             ".3.bt2",
