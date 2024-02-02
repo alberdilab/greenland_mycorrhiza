@@ -62,11 +62,18 @@ rule index_unite:
     input:
         "resources/database/sh_general_release_dynamic_25.07.2023.fasta"
     output:
-        "resources/database/unite"
+        base="resources/database/unite",
+        bt1="resources/database/unite.1.bt2l",
+        bt2="resources/database/unite.2.bt2l",
+        bt3="resources/database/unite.3.bt2l",
+        bt4="resources/database/unite.4.bt2l",
+        btrev1="resources/database/unite.rev.1.bt2l",
+        btrev2="resources/database/unite.rev.2.bt2l"
     conda:
         "environment.yaml"
     params:
         jobname = "mags_index",
+        base = "resources/database/unite"
     threads:
         24
     resources:
@@ -82,7 +89,7 @@ rule index_unite:
         bowtie2-build \
             --large-index \
             --threads {threads} \
-            {input} {output} \
+            {input} {params.base} \
         &> {log}
         """
         
@@ -92,8 +99,9 @@ rule bowtie2_unite_mapping:
     input:
         r1 = "results/fastp/{sample}_1.fq.gz",
         r2 = "results/fastp/{sample}_2.fq.gz",
-        bt2_index = "resources/database/unite"
-    output:
+        index = "resources/database/unite"
+        btrev2="resources/database/unite.rev.2.bt2l"
+output:
         bam = "results/bowtie/{sample}.bam"
     params:
         jobname = "mags_{sample}",
@@ -115,7 +123,7 @@ rule bowtie2_unite_mapping:
         bowtie2 \
             --time \
             --threads {threads} \
-            -x {params.database} \
+            -x {input.index} \
             -1 {input.r1} \
             -2 {input.r2} \
             --seed 1337 \
