@@ -62,18 +62,19 @@ rule index_unite:
     input:
         "resources/database/sh_general_release_dynamic_25.07.2023.fasta"
     output:
-        base="resources/database/unite",
-        bt1="resources/database/unite.1.bt2l",
-        bt2="resources/database/unite.2.bt2l",
-        bt3="resources/database/unite.3.bt2l",
-        bt4="resources/database/unite.4.bt2l",
-        btrev1="resources/database/unite.rev.1.bt2l",
-        btrev2="resources/database/unite.rev.2.bt2l"
+        multiext(
+            "resources/database/unite",
+            ".1.bt2",
+            ".2.bt2",
+            ".3.bt2",
+            ".4.bt2",
+            ".rev.1.bt2",
+            ".rev.2.bt2")
     conda:
         "environment.yaml"
     params:
         jobname = "mags_index",
-        base = "resources/database/unite"
+        database = "resources/database/unite"
     threads:
         24
     resources:
@@ -89,8 +90,10 @@ rule index_unite:
         bowtie2-build \
             --large-index \
             --threads {threads} \
-            {input} {params.base} \
+            {input} {params.database} \
         &> {log}
+
+
         """
         
 ################################################################################
@@ -99,13 +102,19 @@ rule bowtie2_unite_mapping:
     input:
         r1 = "results/fastp/{sample}_1.fq.gz",
         r2 = "results/fastp/{sample}_2.fq.gz",
-        index = "resources/database/unite",
-        btrev2="resources/database/unite.rev.2.bt2l"
+        index=multiext(
+            "resources/database/unite",
+            ".1.bt2",
+            ".2.bt2",
+            ".3.bt2",
+            ".4.bt2",
+            ".rev.1.bt2",
+            ".rev.2.bt2")
     output:
         bam = "results/bowtie/{sample}.bam"
     params:
         jobname = "mags_{sample}",
-        database = "resources/database/sh_general_release_dynamic_25.07.2023.fasta"
+        database = "resources/database/unite"
     conda:
         "environment.yaml"
     threads:
@@ -123,7 +132,7 @@ rule bowtie2_unite_mapping:
         bowtie2 \
             --time \
             --threads {threads} \
-            -x {input.index} \
+            -x {params.database} \
             -1 {input.r1} \
             -2 {input.r2} \
             --seed 1337 \
