@@ -74,7 +74,7 @@ rule index_unite:
         "environment.yaml"
     params:
         jobname = "mags_index",
-        database = "resources/database/unite"
+        database = "resources/database/sh_general_release_dynamic_25.07.2023"
     threads:
         24
     resources:
@@ -114,7 +114,7 @@ rule bowtie2_unite_mapping:
         bam = "results/bowtie/{sample}.bam"
     params:
         jobname = "mags_{sample}",
-        database = "resources/database/unite"
+        database = "resources/database/sh_general_release_dynamic_25.07.2023"
     conda:
         "environment.yaml"
     threads:
