@@ -99,7 +99,7 @@ rule bowtie2_unite_mapping:
     input:
         r1 = "results/fastp/{sample}_1.fq.gz",
         r2 = "results/fastp/{sample}_2.fq.gz",
-        index = "resources/database/unite"
+        index = "resources/database/unite",
         btrev2="resources/database/unite.rev.2.bt2l"
     output:
         bam = "results/bowtie/{sample}.bam"
