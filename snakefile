@@ -101,7 +101,7 @@ rule bowtie2_unite_mapping:
         r2 = "results/fastp/{sample}_2.fq.gz",
         index = "resources/database/unite"
         btrev2="resources/database/unite.rev.2.bt2l"
-output:
+    output:
         bam = "results/bowtie/{sample}.bam"
     params:
         jobname = "mags_{sample}",
