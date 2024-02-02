@@ -135,3 +135,23 @@ module load mamba/1.5.6 snakemake/7.20.0
 # Run the pipeline using slurm
 ./run_slurm
 ```
+
+## Unite mapping pipeline
+```sh
+# Load dependencies mamba and snakemake (not needed if they are already installed in root)
+module load mamba/1.5.6 snakemake/7.20.0
+
+screen -r unite_mapping
+
+#Run snakemake
+snakemake \
+    --use-conda \
+    --conda-frontend mamba \
+    --rerun-incomplete \
+    --jobs 20 \
+    --cluster 'sbatch -o logs/{params.jobname}-slurm-%j.out --mem {resources.mem_gb}G --time {resources.time} -c {threads} --job-name={params.jobname} -v'
+    --keep-going \
+    --notemp \
+    --slurm \
+    --latency-wait 60
+```
