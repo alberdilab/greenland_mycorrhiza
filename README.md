@@ -155,3 +155,14 @@ snakemake \
     --slurm \
     --latency-wait 60
 ```
+
+### Summarize mapping stats
+```r
+read_tsv("/Users/anttonalberdi/Downloads/counts.tsv") %>%
+  rename(taxon=1) %>%
+  rename_all(~gsub(" Read Count", "", .)) %>%
+  filter(rowSums(select_if(., is.numeric)) != 0) %>%
+  mutate(total = rowSums(select_if(., is.numeric))) %>%
+  arrange(-total) %>%
+  write.csv(.,"/Users/anttonalberdi/Downloads/greenland.csv")
+```
