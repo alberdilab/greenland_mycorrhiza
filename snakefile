@@ -62,14 +62,7 @@ rule index_unite:
     input:
         "resources/database/sh_general_release_dynamic_25.07.2023.fasta"
     output:
-        multiext(
-            "resources/database/sh_general_release_dynamic_25.07.2023",
-            ".1.bt2",
-            ".2.bt2",
-            ".3.bt2",
-            ".4.bt2",
-            ".rev.1.bt2",
-            ".rev.2.bt2")
+        touch('resources/database/index.done') # Flag file
     conda:
         "environment.yaml"
     params:
@@ -100,16 +93,9 @@ rule index_unite:
 ### Map non-host reads to DRAM genes files using Bowtie2
 rule bowtie2_unite_mapping:
     input:
+        idx = "resources/database/index.done",
         r1 = "results/fastp/{sample}_1.fq.gz",
         r2 = "results/fastp/{sample}_2.fq.gz",
-        index=multiext(
-            "resources/database/sh_general_release_dynamic_25.07.2023",
-            ".1.bt2",
-            ".2.bt2",
-            ".3.bt2",
-            ".4.bt2",
-            ".rev.1.bt2",
-            ".rev.2.bt2")
     output:
         bam = "results/bowtie/{sample}.bam"
     params:
