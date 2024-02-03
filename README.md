@@ -5,7 +5,7 @@ The following genome-resolved metagenomic pipeline is run: https://github.com/3d
 
 This pipeline must be run in a high computation cluster. 
 
-## Root software dependencies
+## Genome-resolved microbial metagenomics
 The pipeline only relies on two software:
 
 - Mamba
@@ -13,7 +13,7 @@ The pipeline only relies on two software:
 
 The rest of the many required softwatre are downloaded and installed inside the conda environments.
 
-## Prepare working environment
+### Prepare working environment
 
 ```sh
 # Load dependencies mamba and snakemake (not needed if they are already installed in root)
@@ -35,9 +35,9 @@ screen -S greenland_shotgun
 ./run
 ```
 
-## Prepare the input files
+### Prepare the input files
 
-### Data files
+#### Data files
 - Move the raw data files to the 'resources/reads/' directory or create soft links.
 
 ```sh
@@ -56,7 +56,7 @@ cd resources/reference/
 wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/028/015/225/GCA_028015225.1_CAF_CaMyos_1.0/GCA_028015225.1_CAF_CaMyos_1.0_genomic.fna.gz
 cd ../../
 ```
-### Sample input file
+#### Sample input file
 Edit the 'config/samples.tsv' document and add samples names, library identifiers, file locations, adapter sequences and (co)assembly information.
 
 - **sample_id:** unique name that will be used to identify files associated with each sample. Ideally, these should be short and contain only letters and numbers to avoid hiccups during the data processing.
@@ -72,7 +72,7 @@ sample_id	library_id	forward_filename	reverse_filename	forward_adapter	reverse_a
 M10	lib1	resources/reads/sSH_IndPCR_1A_EKDL210009000-1a-AK4939-AK6653_HTF5CDSX2_L1_1.fq.gz	resources/reads/SH_IndPCR_1A_EKDL210009000-1a-AK4939-AK6653_HTF5CDSX2_L1_2.fq.gz	AGATCGGAAGAGCACACGTCTGAACTCCAGTCA	AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT	M10
 ```
 
-### Database paths
+#### Database paths
 Databases are stored in the directory 'resources/databases'. The default databases are minor representations that allow testing the pipeline. These need to be replaced by proper databases.
 
 ```sh
@@ -103,7 +103,7 @@ ln -s /maps/projects/mjolnir1/data/databases/kraken2/kraken2_RefSeqV205_Complete
 cd ../../../
 ```
 
-### Add host reference genome to the config file
+#### Add host reference genome to the config file
 Edit 'config/features.yml' with reference databases:
 
 ```yaml
@@ -120,7 +120,7 @@ singlem_database: "resources/mock_singlem_db"
 kraken2_database: "resources/kraken2_mock"
 ```
 
-## Run pipeline
+### Run pipeline
 Once all the input files and data are properly set, it is time to launch the pipeline.
 ```sh
 # Ensure the pipeline is launched from the working directory
@@ -166,3 +166,13 @@ read_tsv("/Users/anttonalberdi/Downloads/counts.tsv") %>%
   arrange(-total) %>%
   write.csv(.,"/Users/anttonalberdi/Downloads/greenland.csv")
 ```
+## Metaeuk pipeline
+Fungal gene prediction.
+https://github.com/soedinglab/metaeuk
+
+### Gene prediction
+```sh
+metaeuk easy-predict contigsFasta/contigsDB proteinsFasta/referenceDB predsResults tempFolder
+```
+
+### Gene annotation
